@@ -186,7 +186,6 @@ function HomeScreen() {
                     placeholder="Search movies..."
                 />
             </View>
-            <Text>{error}</Text>
             <View style={styles.container}>
             </View>
             <View style={styles.filterRow}>
