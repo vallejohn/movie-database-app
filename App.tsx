@@ -5,13 +5,21 @@
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
+import * as React from 'react';
+import { createStaticNavigation, NavigationContainer, } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import DetailsScreen from './src/pages/details';
+
 import { StatusBar, StyleSheet, useColorScheme, View, Text } from 'react-native';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import HomeScreen from './src/pages/home';
+import { RootStackParamList } from './src/navigation/types';
+import FavoritesScreen from './src/favorites';
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -28,9 +36,13 @@ function AppContent() {
   const safeAreaInsets = useSafeAreaInsets();
 
   return (
-    <View style={styles.container}>
-      <HomeScreen/>
-    </View>
+   <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Favorites" component={FavoritesScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
